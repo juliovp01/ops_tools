@@ -1,2 +1,5 @@
 ---
-# defaults file for logging
+# defaults file for OpenStack Operation logging tools.
+fluentd_plugins: []
+fluentd_sources: []
+fluentd_matches: []

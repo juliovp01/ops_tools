@@ -1,2 +1,10 @@
 ---
-# handlers file for logging
+# handlers file for elasticsearch-fluentd-kibana
+- name: restart elasticsearch
+  service: name=elasticsearch state=restarted
+
+- name: restart apache
+  service: name=httpd state=restarted
+
+- name: restart fluentd
+  service: name=fluentd state=restarted
