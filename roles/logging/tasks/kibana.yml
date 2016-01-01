@@ -9,9 +9,15 @@
 
 - name: Disable SELinux
   sudo: yes
-  service: enabled=no  name=selinux  state=disabled
+  service: enabled=no  name=selinux  state=stopped
   notify: restart apache
 
+- name: ensure python-selinux is installed on all nodes.
+  action: yum name=libselinux-python state=installed  
+
+- name: set SELinux to permissive
+  action: selinux policy=targeted state=permissive
+
 - name: Configure Kibana
-  template: src= ../templates/kibana_default.json dest= /usr/share/kibana-3.1.0/app/dashboards/default.json
+  template: src= kibana_default.json dest= /usr/share/kibana-3.1.0/app/dashboards/default.json
   notify: restart apache
