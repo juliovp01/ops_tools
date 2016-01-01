@@ -8,14 +8,3 @@
 #  sudo: yes
 #  rhn_channel: name=rhel-7-server-openstack-7.0-optools-rpms  password=  state=present  sysname=  url=  user=  
 #  with_items:  array
-
-- name: Intall common packages.
-  sudo: yes
-  yum: name= "{{ item }}" state=present   
-  with_items:  
-   - vim
-   - make
-   - curl
-   - libcurl
-   - wget 
-   - automake
