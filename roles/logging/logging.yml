@@ -13,18 +13,8 @@
   handlers:
     - include: handlers/main.yml
 
-
-- name: Logging clients
-  hosts: clients
-  remote_user: root
-  user: root
-  roles:
-    - logging
-  vars:
-    - fluentd_server_fqdn: fluentd-server.fqdn
-
-
-- hosts: log_client_servers
+# tasks for the clients.
+- hosts: clients
   vars:
     - fluentd_server_fqdn: fluentd-server.fqdn
   tasks:
