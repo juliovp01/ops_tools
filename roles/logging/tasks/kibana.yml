@@ -1,0 +1,17 @@
+---
+- name: Installing Kibana.
+  sudo: yes
+  yum: name=kibana  state=present
+
+- name: Copy Configuration file for Kibana3
+  copy: src=../files/kibana3.conf dest=/etc/httpd/conf.d/kibana3.conf 
+  notify: restart apache
+
+- name: Disable SELinux
+  sudo: yes
+  service: enabled=no  name=selinux  state=disabled
+  notify: restart apache
+
+- name: Configure Kibana
+  template: src= ../templates/kibana_default.json dest= /usr/share/kibana-3.1.0/app/dashboards/default.json
+  notify: restart apache

@@ -1,0 +1,27 @@
+---
+## Client
+- name: Installing Fluentd.
+  sudo: yes
+  yum: name=fluentd  state=present 
+
+- name: Installing Fluentd-Pluging.
+  sudo: yes
+  yum: name=rubygem-fluent-plugin-add  state=present 
+
+- name: Enable Fluentd.
+  sudo: yes
+  service: name=fluentd enabled=yes state=started
+
+- name: Copy Configuration file for FluentdClient
+  copy: src=../files/fluentd_client.conf dest=/etc/fluentd/fluent.conf 
+  notify: restart apache
+
+# Forwarder
+- template: src=forwarder.conf.j2 dest=/etc/fluentd/fluentd.conf owner=root group=root mode=644
+  notify: restart fluentd
+
+- name: Add users to Fluentd Group.
+  sudo: yes
+  shell: for user in {keystone,nova,neutron,cinder,glance}; do  usermod -a -G $user fluentd; done
+  notify: restart fluentd
+

@@ -1,0 +1,8 @@
+---
+# defaults file for OpenStack Operation logging tools.
+# fluentd fqdn used by forwarders to fluentd
+fluentd_server_fqdn: logging_host
+
+# Address of elasticsearch used by fluentd
+es_fqdn: localhost
+es_port: 9200

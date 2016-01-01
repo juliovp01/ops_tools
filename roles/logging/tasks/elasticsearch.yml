@@ -1,0 +1,26 @@
+---
+- name: Installing Elasticsearch.
+  sudo: yes
+  yum: name=elasticsearch  state=present
+
+- name: Enable Elasticsearch.
+  sudo: yes
+  service: name=elasticsearch enabled=yes state=started  
+
+- name: Configure Elasticsearch
+  sudo: true
+  lineinfile:
+    dest: /etc/elasticsearch/elasticsearch.yml
+    regexp: ''
+    insertafter: EOF
+    line: "http.cors.enabled: true"
+  notify: restart elasticsearch
+
+- name: Configure Elasticsearch 2
+  sudo: true
+  lineinfile:
+    dest: /etc/elasticsearch/elasticsearch.yml
+    regexp: ''
+    insertafter: EOF
+    line: 'http.cors.allow-origin: "/.*/" '
+  notify: restart elasticsearch

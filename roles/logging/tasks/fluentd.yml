@@ -1,0 +1,16 @@
+---
+- name: Installing Fluentd.
+  sudo: yes
+  yum: name=fluentd  state=present 
+
+- name: Installing Fluentd-Plugin.
+  sudo: yes
+  yum: name=rubygem-fluent-plugin-elasticsearch  state=present 
+
+- name: Enable Fluentd.
+  sudo: yes
+  service: name=fluentd enabled=yes state=started
+
+- name: Copy Configuration file for Fluentd
+  copy: src= ../files/fluent.conf dest= /etc/fluentd/fluent.conf
+  notify: restart fluentd

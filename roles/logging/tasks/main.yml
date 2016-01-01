@@ -1,0 +1,8 @@
+---
+- include: prereqs.yml
+- include: firewall.yml
+- include: apache.yml
+- include: elasticsearch.yml
+- include: kibana.yml
+- include: fluentd.yml
+- include: clients.yml

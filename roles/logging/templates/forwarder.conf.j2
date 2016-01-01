@@ -1,0 +1,9 @@
+# {{ ansible_managed }}
+<match **>
+  type forward
+  <server>
+    name {{ansible_hostname}}
+    host {{ fluentd_server_fqdn }}
+    port 4000
+  </server>
+</match>
