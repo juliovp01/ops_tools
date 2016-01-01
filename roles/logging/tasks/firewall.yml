@@ -1,8 +1,12 @@
 ---
 - name: Adding Apache port to firewalld.
   sudo: yes
-  firewalld: permanent=yes  port=80  state=enabled  zone=public  
+  firewalld: permanent=yes  port=80/tcp  state=enabled  zone=public  
 
 - name: Adding Fluentd port to firewalld.
   sudo: yes
-  firewalld: permanent=yes  port=4000 state=enabled  zone=public  
+  firewalld: permanent=yes  port=4000/tcp state=enabled  zone=public  
+
+- name: Adding Fluentd port to firewalld UDP.
+  sudo: yes
+  firewalld: permanent=yes  port=4000/udp state=enabled  zone=public  
