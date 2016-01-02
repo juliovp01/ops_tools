@@ -3,7 +3,7 @@ monitoring_host ansible_ssh_host=172.16.59.172
 performance_host ansible_ssh_host=172.16.59.172
 
 [clients]
-client ansible_ssh_host=172.16.59.173
+client ansible_ssh_host=172.16.59.174
 #controller1 ansible_ssh_host=10.42.0.6
 #controller2 ansible_ssh_host=10.42.0.7
 #controller3 ansible_ssh_host=10.42.0.8
