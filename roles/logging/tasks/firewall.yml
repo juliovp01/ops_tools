@@ -21,5 +21,4 @@
 
 - name: Reload firewalld.
   sudo: yes
-  shell: /usr/bin/firewall-cmd --reload 
-  notify: restart firewalld 
+  shell: /usr/bin/firewall-cmd --reload
