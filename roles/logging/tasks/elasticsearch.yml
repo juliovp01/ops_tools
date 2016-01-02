@@ -7,20 +7,6 @@
   sudo: yes
   service: name=elasticsearch enabled=yes state=started  
 
-- name: Configure Elasticsearch
-  sudo: true
-  lineinfile:
-    dest: /etc/elasticsearch/elasticsearch.yml
-    regexp: ''
-    insertafter: EOF
-    line: "http.cors.enabled: true"
-  notify: restart elasticsearch
-
-- name: Configure Elasticsearch 2
-  sudo: true
-  lineinfile:
-    dest: /etc/elasticsearch/elasticsearch.yml
-    regexp: ''
-    insertafter: EOF
-    line: 'http.cors.allow-origin: "/.*/" '
+- name: Copy Configuration file for Fluentd
+  copy: src=files/elasticsearch.yml.file dest=/etc/elasticsearch/elasticsearch.yml
   notify: restart elasticsearch
