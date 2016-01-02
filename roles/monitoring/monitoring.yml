@@ -6,10 +6,9 @@
   tasks:
     - include: tasks/prereqs.yml
     - include: tasks/firewall.yml
-    - include: tasks/apache.yml
-    - include: tasks/elasticsearch.yml
-    - include: tasks/kibana.yml
-    - include: tasks/fluentd.yml
+    - include: tasks/sensu.yml
+    - include: tasks/uchiwa.yml
+    - include: tasks/clients.yml
   handlers:
     - include: handlers/main.yml
 
