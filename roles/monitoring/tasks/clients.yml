@@ -64,5 +64,6 @@
    - pacemake_host_check.py 
    - process.py 
    - utils.py
+  notify: restart sensu-client
 
 
