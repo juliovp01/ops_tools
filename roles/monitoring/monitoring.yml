@@ -8,7 +8,6 @@
     - include: tasks/firewall.yml
     - include: tasks/sensu.yml
     - include: tasks/uchiwa.yml
-    - include: tasks/clients.yml
   handlers:
     - include: handlers/main.yml
 
