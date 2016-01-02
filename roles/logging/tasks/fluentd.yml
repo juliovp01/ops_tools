@@ -12,5 +12,5 @@
   service: name=fluentd enabled=yes state=started
 
 - name: Copy Configuration file for Fluentd
-  copy: src= ../files/fluent.conf dest= /etc/fluentd/fluent.conf
+  copy: src=files/fluent.conf dest=/etc/fluentd/fluent.conf
   notify: restart fluentd
