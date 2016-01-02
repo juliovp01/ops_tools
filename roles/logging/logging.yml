@@ -15,6 +15,7 @@
 
 # tasks for the clients.
 - hosts: clients
+  remote_user: root 
   vars:
     - fluentd_server_fqdn: fluentd-server.fqdn
   tasks:
