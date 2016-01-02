@@ -23,5 +23,6 @@
 - name: Add users to Fluentd Group.
   sudo: yes
   shell: for user in {keystone,nova,neutron,cinder,glance}; do  usermod -a -G $user fluentd; done
+  ignore_errors: yes
   notify: restart fluentd
 
