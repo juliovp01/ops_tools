@@ -51,7 +51,7 @@
    - python-neutronclient
    - python-novaclient
 
-- name: Copying the advance python checks.
+- name: Copying the advance python checks. This will not do nothing in this version, will work to get working on v2.0.
   sudo: yes
   copy: src={{item}}  dest=/etc/sensu/conf.d/{{item}}
   with_items:
@@ -66,6 +66,8 @@
    - pacemaker_host_check.py 
    - process.py 
    - utils.py
+   - setup.py
+   - setup.cfg
   notify: restart sensu-client
   notify: restart sensu-server
   notify: restart sensu-api
