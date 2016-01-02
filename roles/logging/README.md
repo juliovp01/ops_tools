@@ -1,4 +1,4 @@
-Role Name
+Logging
 =========
 
 This is a role to install and configure Elasticsearch + FluentD + Kibana on RHEL 7 to collect logs from a RHEL OSP Installation.
