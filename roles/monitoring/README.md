@@ -1,5 +1,5 @@
-Logging
-=========
+Monitoring
+==========
 
 This is a role to install and configure Sensu and Uchiwa on RHEL 7 to monitor a RHEL OSP Installation.
 
