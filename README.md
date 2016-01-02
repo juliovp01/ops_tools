@@ -7,6 +7,12 @@ Ansible role to install and configure the Operational Tools for Logging, Monitor
 * Install and configures  an elasticseach, kibana and fluentd host. 
 * Sets up the fluentd client on the OpenStack Cluster. 
 
+
+DISCLAIMER:
+-----------
+This software is provided "as is" and "with all faults" and we do not offer any warranties. If you find a problem, feel free to fix it and contibute back using Github.
+
+
 Requirements
 ------------
 
@@ -31,7 +37,10 @@ License
 MIT
 
 INSTRUCTIONS
--------------
+============
+
+FOR ALL PLAYBOOKS: 
+------------------
 
 First, you will need to edit the the prerequisite task file: ops_tools/logging/tasks/prereqs.yml . In this file we will define the RHN registration and the RHN Channel, please fill it with your RHN information.
 
@@ -39,8 +48,10 @@ You will also need to change the FQDN for the Logging Host the playbook file: ro
 
 You will also need to change the host file that you are using, to math the requirements of each individual README file for the roles.
 
+
 RUNNING THE PLAYBOOKS: 
 ---------------------
+
 
 In order to run the installation of the logging role, you need to execute : 
 
