@@ -20,35 +20,7 @@ The variable: fluentd_server_fqdn sets the hostname of the Logging server for th
 Example Playbook
 ----------------
 
-In order to facilitate the usage of this role, we are including a file: logging.yml that contains: 
-
-------
----
-# tasks file for elasticsearch-fluentd-kibana
-- hosts: logging_host
-  remote_user: root
-  vars:
-  tasks:
-    - include: tasks/prereqs.yml
-    - include: tasks/firewall.yml
-    - include: tasks/apache.yml
-    - include: tasks/elasticsearch.yml
-    - include: tasks/kibana.yml
-    - include: tasks/fluentd.yml
-  handlers:
-    - include: handlers/main.yml
-
-# tasks for the clients.
-- hosts: clients
-  remote_user: root 
-  vars:
-    - fluentd_server_fqdn: fluentd-server.fqdn
-  tasks:
-    - include: tasks/prereqs.yml
-    - include: tasks/clients.yml
-  handlers:
-    - include: handlers/main.yml
-------
+In order to facilitate the usage of this role, we are including a file: logging.yml.
 
 To run it, point it to your host file and execute ansible playbook: 
 
