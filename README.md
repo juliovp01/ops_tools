@@ -44,7 +44,7 @@ FOR ALL PLAYBOOKS:
 
 First, you will need to edit the the prerequisite task file: ops_tools/logging/tasks/prereqs.yml . In this file we will define the RHN registration and the RHN Channel, please fill it with your RHN information.
 
-You will also need to change the FQDN for the Logging Host the playbook file: role/logging/logging.yml : fluentd_server_fqdn: logging_host, more details on the README.md file for the specific role. 
+You will also need to change the FQDN for the Logging Host the playbook file: role/logging/logging.yml : fluentd_server_fqdn: logging_host, more details on the README.md file for the specific role. The same applies to the monitoring playbook.
 
 You will also need to change the host file that you are using, to math the requirements of each individual README file for the roles.
 
@@ -57,4 +57,7 @@ In order to run the installation of the logging role, you need to execute :
 
 ansible-playbook -i hosts roles/logging/logging.yml
 
+In order to run the installation of the monitoring role, you need to execute : 
+
+ansible-playbook -i hosts roles/monitoring/monitoring.yml
 
