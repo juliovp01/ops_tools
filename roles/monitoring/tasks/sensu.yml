@@ -3,11 +3,6 @@
   sudo: yes
   yum: name=sensu  state=present
 
-- name: Enable Sensu.
-  sudo: yes
-  service: name=sensu enabled=yes state=started
-  notify: restart sensu
-
 - name: Installing Redis.
   sudo: yes
   yum: name=redis  state=present
@@ -29,26 +24,33 @@
 - name: Add RabbiMQ Virtualhost for Sensu.
   sudo: yes
   shell: rabbitmqctl add_vhost /sensu
+  ignore_errors: yes
 
 - name: Add Sensu user to RabbiMQ Virtualhost.
   sudo: yes
   shell: rabbitmqctl add_user sensu sensu
+  ignore_errors: yes
 
 - name: Set permissions for Sensu user to RabbiMQ Virtualhost.
   sudo: yes
   shell: rabbitmqctl set_permissions -p /sensu sensu ".*" ".*" ".*"
+  ignore_errors: yes
 
 - name: Copy Configuration file for Sensu RabbitMQ-Server
-  copy: src=/files/rabbitmq.json dest=/etc/sensu/conf.d/rabbitmq.json
-  notify: restart sensu-server
-  notify: restart sensu-api
+  copy: src=files/rabbitmq.json dest=/etc/sensu/conf.d/rabbitmq.json
 
 - name: Copy Configuration file for Sensu Redis
-  copy: src=/files/redis.json dest=/etc/sensu/conf.d/redis.json
-  notify: restart sensu-server
-  notify: restart sensu-api
+  copy: src=files/redis.json dest=/etc/sensu/conf.d/redis.json
 
 - name: Copy Configuration file for Sensu API
-  copy: src=/files/api.json dest=/etc/sensu/conf.d/api.json
+  copy: src=files/api.json dest=/etc/sensu/conf.d/api.json
+
+- name: Enable Sensu-Server.
+  sudo: yes
+  service: name=sensu-server enabled=yes state=started
   notify: restart sensu-server
+
+- name: Enable Sensu-API.
+  sudo: yes
+  service: name=sensu-api enabled=yes state=started
   notify: restart sensu-api
