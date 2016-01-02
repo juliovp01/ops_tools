@@ -1,0 +1,16 @@
+---
+- name: Adding Apache port to Firewalld.
+  sudo: yes
+  firewalld: permanent=yes  port=80/tcp  state=enabled
+
+- name: Adding port for RabbitMQ to Firewalld.
+  sudo: yes
+  firewalld: permanent=yes  port=5672/tcp state=enabled
+
+- name: Adding Uchiwa port to Firewalld.
+  sudo: yes
+  firewalld: permanent=yes  port=3000/tcp state=enabled
+
+- name: Reload firewalld.
+  sudo: yes
+  shell: /usr/bin/firewall-cmd --reload

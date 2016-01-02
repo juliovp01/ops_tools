@@ -1,0 +1,7 @@
+---
+- include: prereqs.yml
+- include: firewall.yml
+- include: apache.yml
+- include: sensu.yml
+- include: uchiwa.yml
+- include: clients.yml

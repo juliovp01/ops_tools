@@ -1,0 +1,14 @@
+{
+  "sensu": [
+    {
+      "name": "Openstack Cluster",
+      "host": "localhost",
+      "port": 4567
+    }
+  ],
+  "uchiwa": {
+    "host": "0.0.0.0",
+    "port": 3000,
+    "refresh": 5
+  }
+}

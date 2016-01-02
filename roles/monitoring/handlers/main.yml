@@ -1,0 +1,19 @@
+---
+# handlers file for elasticsearch-fluentd-kibana
+- name: restart redis
+  service: name=redis state=restarted
+
+- name: restart rabbitmq-server
+  service: name=rabbitmq-server state=restarted
+
+- name: restart sensu-server
+  service: name=sensu-server state=restarted
+
+- name: restart sensu-api
+  service: name=sensu-api state=restarted
+
+- name: restart sensu-client
+  service: name=sensu-client state=restarted
+
+- name: restart uchiwa
+  service: name=uchiwa state=reload

@@ -1,0 +1,8 @@
+---
+- name: Installing Apache.
+  sudo: yes
+  yum: name=httpd  state=present
+
+- name: Enable Apache.
+  sudo: yes
+  service: name=httpd enabled=yes state=started  

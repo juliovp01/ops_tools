@@ -1,0 +1,68 @@
+---
+## Client side configuration.
+- name: Installing Sensu.
+  sudo: yes
+  yum: name=sensu  state=present 
+
+- name: Installing RubyGem-Pluging.
+  sudo: yes
+  yum: name=rubygem-yajl-ruby  state=present 
+
+- name: Enable Sensu.
+  sudo: yes
+  service: name=sensu enabled=yes state=started
+
+## Config Client
+- template: src=rabbit_client.json.j2 dest=/etc/sensu/conf.d/rabbitmq.json owner=root group=root mode=644
+  notify: restart sensu-client
+
+- template: src=client.json.j2 dest=/etc/sensu/conf.d/client.json owner=root group=root mode=644
+  notify: restart sensu-client
+
+- name: Restart Sensu Client.
+  sudo: yes
+  shell: systemctl restart sensu-client
+
+## Transfer script check creator. 
+- name: Copy Check script creator.
+  sudo: yes
+  copy: src=/files/check_script.sh dest=/tmp/check_script.sh
+
+- name: Execute Script.
+  sudo: yes
+  shell: /usr/bin/sh /tmp/check_script.sh
+  ignore_errors: yes
+  notify: restart sensu-client
+
+##Install required Python packages for Check advance Plugins. 
+
+- name: Install required packages for advance Python Checks.
+  sudo: yes
+  yum: name= {{ item }}  state=present
+  with_items:
+   - python-six
+   - python-psutil
+   - python-ceilometerclient
+   - python-cinderclient
+   - python-glanceclient
+   - python-keystoneclient
+   - python-neutronclient
+   - python-novaclient
+
+- name: Copying the advance python checks.
+  sudo: yes
+  copy: src=/files/{{item}}  dest=/etc/sensu/conf.d/{{item}}
+  with_items:
+   - amqp.py
+   - ceilometer.py 
+   - ceph.py 
+   - cinder.py 
+   - glance.py 
+   - keystone.py 
+   - neutron.py 
+   - nova.py 
+   - pacemake_host_check.py 
+   - process.py 
+   - utils.py
+
+
