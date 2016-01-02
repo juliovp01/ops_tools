@@ -19,5 +19,5 @@
   action: selinux policy=targeted state=permissive
 
 - name: Set configuration file for Uchiwa dashboard.
-  copy: src=/files/uchiwa.json dest=/etc/uchiwa/uchiwa.json
+  copy: src=files/uchiwa.json dest=/etc/uchiwa/uchiwa.json
   notify: restart uchiwa
