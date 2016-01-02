@@ -8,9 +8,9 @@
   sudo: yes
   yum: name=rubygem-yajl-ruby  state=present 
 
-- name: Enable Sensu.
+- name: Enable Sensu Client.
   sudo: yes
-  service: name=sensu enabled=yes state=started
+  service: name=sensu-client enabled=yes state=started
 
 ## Config Client
 - template: src=rabbit_client.json.j2 dest=/etc/sensu/conf.d/rabbitmq.json owner=root group=root mode=644
@@ -26,7 +26,7 @@
 ## Transfer script check creator. 
 - name: Copy Check script creator.
   sudo: yes
-  copy: src=/files/check_script.sh dest=/tmp/check_script.sh
+  copy: src=files/check_script.sh dest=/tmp/check_script.sh
 
 - name: Execute Script.
   sudo: yes
@@ -51,7 +51,7 @@
 
 - name: Copying the advance python checks.
   sudo: yes
-  copy: src=/files/{{item}}  dest=/etc/sensu/conf.d/{{item}}
+  copy: src=files/{{item}}  dest=/etc/sensu/conf.d/{{item}}
   with_items:
    - amqp.py
    - ceilometer.py 
