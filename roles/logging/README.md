@@ -14,20 +14,50 @@ This is a list of requirements for this role:
 Role Variables
 --------------
 
-A description of the settable variables for this role should go here, including any variables that are in defaults/main.yml, vars/main.yml, and any variables that can/should be set via parameters to the role. Any variables that are read from other roles and/or the global scope (ie. hostvars, group vars, etc.) should be mentioned here as well.
-
-Dependencies
-------------
+The variable: fluentd_server_fqdn sets the hostname of the Logging server for the fluentd clients.
 
 
 Example Playbook
 ----------------
 
-Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
+In order to facilitate the usage of this role, we are including a file: logging.yml that contains: 
 
-    - hosts: servers
-      roles:
-         - { role: username.rolename, x: 42 }
+------
+---
+# tasks file for elasticsearch-fluentd-kibana
+- hosts: logging_host
+  remote_user: root
+  vars:
+  tasks:
+    - include: tasks/prereqs.yml
+    - include: tasks/firewall.yml
+    - include: tasks/apache.yml
+    - include: tasks/elasticsearch.yml
+    - include: tasks/kibana.yml
+    - include: tasks/fluentd.yml
+  handlers:
+    - include: handlers/main.yml
+
+# tasks for the clients.
+- hosts: clients
+  remote_user: root 
+  vars:
+    - fluentd_server_fqdn: fluentd-server.fqdn
+  tasks:
+    - include: tasks/prereqs.yml
+    - include: tasks/clients.yml
+  handlers:
+    - include: handlers/main.yml
+------
+
+To run it, point it to your host file and execute ansible playbook: 
+
+ansible-playbook -i path/to/hosts logging.yml
+
+Your host file should containt two types of entries: 
+
+logging_host -> This point to the IP of your ElasticSearch server. 
+clients -> This points to the IP of the clients where FluentD will gather information.
 
 License
 -------
@@ -37,4 +67,4 @@ MIT
 Author Information
 ------------------
 
-The author for this role is Julio Villarreal, to contact him you could email julio@linux.com or julio@redhat.com. More info at : http://www.juliovillarreal.com.
+The author is Julio Villarreal, to contact him you could email julio@linux.com or julio@redhat.com. More info about the author at : http://www.juliovillarreal.com. Thanks!
