@@ -36,6 +36,15 @@
   ignore_errors: yes
   notify: restart sensu-client
 
+- name: Copying some Sensu System Checks.
+  sudo: yes
+  copy: src={{item}}  dest=/etc/sensu/conf.d/{{item}}
+  with_items:
+   - check-mem.sh
+   - check-disk-health.sh
+   - check-cpu.sh
+   - cpu-usage-metrics.sh
+
 ##Install required Python packages for Check advance Plugins. 
 
 - name: Install required packages for advance Python Checks.
