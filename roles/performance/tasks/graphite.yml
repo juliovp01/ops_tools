@@ -1,0 +1,37 @@
+---
+- name: Installing Graphite.
+  sudo: yes
+  yum: name=graphite-web  state=present
+  notify: restart apache
+
+- name: Installing Grafana.
+  sudo: yes
+  yum: name=grafana  state=present
+
+- name: Copy Configuration file for Grafana.
+  copy: src=files/defaults.ini dest=/usr/share/grafana/conf/defaults.ini
+
+- name: Enable Grafana.
+  sudo: yes
+  service: name=grafana enabled=yes state=started
+  notify: restart grafana
+
+- name: Installing Python-Carbon.
+  sudo: yes
+  yum: name=python-carbon  state=present
+
+- name: Enable Python-Carbon..
+  sudo: yes
+  service: name=python-carbon enabled=yes state=started
+  notify: restart carbon
+
+- name: Copy Configuration file for Graphite Virtual Host.
+  copy: src=files/graphite-web.conf dest=/etc/httpd/conf.d/graphite-web.conf
+
+- name: Sync DB for Graphite.
+  sudo: yes
+  shell: sudo -u apache /usr/bin/graphite-manage syncdb --noinput 
+  ignore_errors: yes
+  notify: restart carbon 
+  notify: restart apache
+  notify: restart grafana

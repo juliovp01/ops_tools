@@ -1,0 +1,13 @@
+---
+# handlers file for elasticsearch-fluentd-kibana
+- name: restart apache
+  service: name=httpd state=restarted
+
+- name: restart carbon
+  service: name=carbon-cache state=restarted
+
+- name: restart grafana
+  service: name=grafana-server state=restarted
+
+- name: restart collectd
+  service: name=collectd state=restarted

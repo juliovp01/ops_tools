@@ -1,0 +1,15 @@
+---
+#- name: Registeting to RHN.
+#  sudo: yes
+#  rhn_register: activationkey=  channels=  password=  server_url=  state=  username=  
+#  with_items:  array
+
+#- name: Subscribing the systems to the required RHN channel: rhel-7-server-openstack-7.0-optools-rpms.
+#  sudo: yes
+#  rhn_channel: name=rhel-7-server-openstack-7.0-optools-rpms  password=  state=present  sysname=  url=  user=  
+#  with_items:  array
+
+#- name: Subscribing the systems to the required RHN channel: rhel-7-server-openstack-7.0-optools-rpms.
+#  sudo: yes
+#  rhn_channel: name=rhel-7-server-optional-rpms password=  state=present  sysname=  url=  user=  
+#  with_items:  array

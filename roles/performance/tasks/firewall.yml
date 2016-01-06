@@ -1,0 +1,20 @@
+---
+- name: Adding Apache port to Firewalld.
+  sudo: yes
+  firewalld: permanent=yes  port=80/tcp  state=enabled
+
+- name: Adding Apache Virtual Host port for Grafana to Firewalld.
+  sudo: yes
+  firewalld: permanent=yes  port=3100/tcp  state=enabled
+
+- name: Adding Apache Virtual Host port for Grafana-default to Firewalld.
+  sudo: yes
+  firewalld: permanent=yes  port=3000/tcp  state=enabled
+
+- name: Adding port for Graphite.
+  sudo: yes
+  firewalld: permanent=yes  port=2003/tcp state=enabled
+
+- name: Reload firewalld.
+  sudo: yes
+  shell: /usr/bin/firewall-cmd --reload

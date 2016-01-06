@@ -1,0 +1,14 @@
+<LoadPlugin write_graphite>
+  Globals false
+</LoadPlugin>
+<Plugin write_graphite>
+  <Carbon>
+    Host "{{grafana_server_fqdn}}"
+    Port "2003"
+    Prefix "collectd."
+    EscapeCharacter "_"
+    StoreRates true
+    LogSendErrors true
+    Protocol "tcp"
+  </Carbon>
+</Plugin>

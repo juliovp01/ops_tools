@@ -1,0 +1,3 @@
+---
+# vars file for logging
+sensu_server_fqdn: sensu-server.fqdn

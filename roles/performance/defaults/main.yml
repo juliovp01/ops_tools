@@ -1,0 +1,4 @@
+---
+# defaults file for OpenStack Operation logging tools.
+# Sensu server
+grafana_server_fqdn: monitoring_host_fqdn

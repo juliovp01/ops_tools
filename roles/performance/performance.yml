@@ -1,0 +1,23 @@
+---
+# tasks file for server side.
+- hosts: performance_host
+  remote_user: root
+  vars:
+  tasks:
+    - include: tasks/prereqs.yml
+    - include: tasks/firewall.yml
+    - include: tasks/apache.yml
+    - include: tasks/graphite.yml
+  handlers:
+    - include: handlers/main.yml
+
+# tasks for the clients.
+- hosts: clients
+  remote_user: root 
+  vars:
+    - grafana_server_fqdn: grafana-server.fqdn
+  tasks:
+    - include: tasks/prereqs.yml
+    - include: tasks/clients.yml
+  handlers:
+    - include: handlers/main.yml

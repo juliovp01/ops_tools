@@ -1,0 +1,19 @@
+---
+## Client side configuration.
+- name: Installing CollectD Client.
+  sudo: yes
+  yum: name=collectd  state=present 
+
+- name: Enable CollectD Client.
+  sudo: yes
+  service: name=collectd enabled=yes state=started
+
+## Config Client
+- name: Copy configuration file for the CollectD agent.
+  template: src=10-write_graphite.conf.j2 dest=/etc/collectd.d/10-write_graphite.conf owner=root group=root mode=644
+  notify: restart collectd
+
+- name: Restart CollectD Client manually.
+  sudo: yes
+  shell: systemctl restart collectd
+
