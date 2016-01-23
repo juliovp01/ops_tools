@@ -61,3 +61,16 @@ In order to run the installation of the monitoring role, you need to execute :
 
 ansible-playbook -i hosts roles/monitoring/monitoring.yml
 
+In order to run the installation of the performance monitoring role, you need to execute : 
+
+ansible-playbook -i hosts roles/performance/performance.yml
+
+IMPORTANT: 
+==========
+
+This is where to access the Front Ends: 
+
+
+Kibana: is on Port: 80 of the Logging Host. 
+Uchiwa is on Port: 3000 of the Monitoring Host. 
+Grafana is on Port: 3100 of the Performance Host.
