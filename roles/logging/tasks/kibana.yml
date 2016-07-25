@@ -9,7 +9,7 @@
 
 - name: Disable SELinux
   sudo: yes
-  service: enabled=no  name=selinux  state=stopped
+  command: setenforce 0
   notify: restart apache
 
 - name: ensure python-selinux is installed on all nodes.

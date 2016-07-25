@@ -1,4 +1,10 @@
 ---
+- name: install firewalld package
+  yum: name=firewalld state=latest
+
+- name: start and enable firewalld
+  service: name=firewalld enabled=yes state=started
+
 - name: Adding Apache port to firewalld.
   sudo: yes
   firewalld: permanent=yes  port=80/tcp  state=enabled
