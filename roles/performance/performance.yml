@@ -11,11 +11,17 @@
   handlers:
     - include: handlers/main.yml
 
+- hosts: localhost
+  tasks:
+    - include: ../openstack/tasks/main.yml
+      when: groups['clients']|length == 0
+
+
 # tasks for the clients.
 - hosts: clients
-  remote_user: root 
+  remote_user: heat-admin 
   vars:
-    - grafana_server_fqdn: grafana-server.fqdn
+    - grafana_server_fqdn: 10.12.33.37
   tasks:
     - include: tasks/prereqs.yml
     - include: tasks/clients.yml

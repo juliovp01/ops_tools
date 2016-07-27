@@ -1,19 +1,25 @@
 ---
 # handlers file for elasticsearch-fluentd-kibana
 - name: restart redis
+  sudo: yes
   service: name=redis state=restarted
 
 - name: restart rabbitmq-server
+  sudo: yes
   service: name=rabbitmq-server state=restarted
 
 - name: restart sensu-server
+  sudo: yes
   service: name=sensu-server state=restarted
 
 - name: restart sensu-api
+  sudo: yes
   service: name=sensu-api state=restarted
 
 - name: restart sensu-client
+  sudo: yes
   service: name=sensu-client state=restarted
 
 - name: restart uchiwa
-  service: name=uchiwa state=reload
+  sudo: yes
+  service: name=uchiwa state=restarted

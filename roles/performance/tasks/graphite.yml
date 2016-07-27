@@ -13,7 +13,7 @@
 
 - name: Enable Grafana.
   sudo: yes
-  service: name=grafana enabled=yes state=started
+  service: name=grafana-server enabled=yes state=started
   notify: restart grafana
 
 - name: Installing Python-Carbon.
@@ -22,7 +22,7 @@
 
 - name: Enable Python-Carbon..
   sudo: yes
-  service: name=python-carbon enabled=yes state=started
+  service: name=carbon-cache enabled=yes state=started
   notify: restart carbon
 
 - name: Copy Configuration file for Graphite Virtual Host.
@@ -32,6 +32,7 @@
   sudo: yes
   shell: sudo -u apache /usr/bin/graphite-manage syncdb --noinput 
   ignore_errors: yes
-  notify: restart carbon 
-  notify: restart apache
-  notify: restart grafana
+  notify: 
+   - restart carbon 
+   - restart apache
+   - restart grafana

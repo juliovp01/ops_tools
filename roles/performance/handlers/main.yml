@@ -1,13 +1,17 @@
 ---
 # handlers file for elasticsearch-fluentd-kibana
 - name: restart apache
+  sudo: yes
   service: name=httpd state=restarted
 
 - name: restart carbon
+  sudo: yes
   service: name=carbon-cache state=restarted
 
 - name: restart grafana
+  sudo: yes
   service: name=grafana-server state=restarted
 
 - name: restart collectd
+  sudo: yes
   service: name=collectd state=restarted

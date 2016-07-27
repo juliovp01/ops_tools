@@ -4,7 +4,7 @@
   sudo: yes
   yum: name=fluentd  state=present 
 
-- name: Installing Fluentd-Pluging.
+- name: Installing Fluentd-Plugin.
   sudo: yes
   yum: name=rubygem-fluent-plugin-add  state=present 
 
@@ -13,12 +13,19 @@
   service: name=fluentd enabled=yes state=started
 
 # Forwarder
-- template: src=forwarder.conf.j2 dest=/etc/fluentd/fluent.conf owner=root group=root mode=644
+- name: copy fluentd config
+  template: src=forwarder.conf.j2 dest=/etc/fluentd/fluent.conf owner=root group=root mode=644
+  sudo: yes
   notify: restart fluentd
 
 - name: Add users to Fluentd Group.
   sudo: yes
   shell: for user in {keystone,nova,neutron,cinder,glance}; do  usermod -a -G $user fluentd; done
   ignore_errors: yes
+  notify: restart fluentd
+
+- name: fix nova log permissions
+  sudo: yes
+  file: path=/var/log/nova state=directory owner=nova group=nova
   notify: restart fluentd
 

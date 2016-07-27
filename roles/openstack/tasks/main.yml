@@ -1,0 +1,14 @@
+---
+- debug: var=groups['clients']|length
+  tags: inventory
+- name: "generate list of openstack nodes"
+  shell: nova list | awk -F= '/ACTIVE/ {print $2}' | sed -e 's/ |//g'
+  register: nova_list
+  tags: inventory
+- name: "add openstack nodes to client group"
+  add_host: name={{ item }} groups=clients
+  tags: inventory
+  with_items: "{{ nova_list.stdout_lines }}"
+- debug: var=nova_list
+  tags: inventory
+
