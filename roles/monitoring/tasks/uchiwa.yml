@@ -7,11 +7,6 @@
   sudo: yes
   service: name=uchiwa enabled=yes state=started 
 
-- name: Disable SELinux
-  sudo: yes
-  service: enabled=no  name=selinux  state=stopped
-  notify: restart uchiwa
-
 - name: ensure python-selinux is installed on all nodes.
   action: yum name=libselinux-python state=installed  
 

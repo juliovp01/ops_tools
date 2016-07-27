@@ -10,6 +10,7 @@
 
 ## Config Client
 - name: Copy configuration file for the CollectD agent.
+  sudo:  yes
   template: src=10-write_graphite.conf.j2 dest=/etc/collectd.d/10-write_graphite.conf owner=root group=root mode=644
   notify: restart collectd
 

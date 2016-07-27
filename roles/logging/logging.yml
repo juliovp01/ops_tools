@@ -13,11 +13,17 @@
   handlers:
     - include: handlers/main.yml
 
+- hosts: localhost
+  tasks:
+    - include: ../openstack/tasks/main.yml
+      when: groups['clients']|length == 0
+
 # tasks for the clients.
 - hosts: clients
-  remote_user: root 
+  remote_user: heat-admin 
   vars:
-    - fluentd_server_fqdn: fluentd-server.fqdn
+    - fluentd_server_ip: 10.12.33.35
+    - fluentd_server_name: logging
   tasks:
     - include: tasks/prereqs.yml
     - include: tasks/clients.yml

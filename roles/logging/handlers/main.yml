@@ -2,12 +2,16 @@
 # handlers file for elasticsearch-fluentd-kibana
 - name: restart elasticsearch
   service: name=elasticsearch state=restarted
+  sudo: yes
 
 - name: restart apache
   service: name=httpd state=restarted
+  sudo: yes
 
 - name: restart fluentd
   service: name=fluentd state=restarted
+  sudo: yes
 
 - name: restart firewalld
   service: name=firewalld state=restarted
+  sudo: yes
